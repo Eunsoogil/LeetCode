@@ -37,6 +37,50 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
+
+
+//let Node_1 = new ListNode(1); Node_1.next = Node_2;
+//let Node_2 = new ListNode(2); Node_2.next = Node_3;
+//let Node_3 = new ListNode(3); Node_3.next = null;
+//
+//let Node_1 = new ListNode(1); 
+//Node_1.next = new ListNode(2);
+//Node_1.next.next = new ListNode(3);
+//
+//function ReadListNode(ListNode){
+//    let num = ""; //출력 해당
+//    let current = ListNode; //현재 처리중인 노드 (null 포함)
+//    let reverse = (str) => { //문자열 역순 내부함수
+//        let temp = [];
+//        let len = str.length;
+//        for(let i = 0; i <= len; i++)
+//            temp.push(str.charAt(len-i));
+//        return temp.join('');
+//    };
+//    while(current != null) {
+//        num += current.val;
+//        current = current.next;
+//    }
+//    return Number(reverse(num));
+//}
+
+
 var addTwoNumbers = function(l1, l2) {
-    
+    let Result = new ListNode(0);
+    let current1 = l1;
+    let current2 = l2;
+    let currentR = Result;
+    let carry = 0;
+    while(current1 != null || current2 != null || carry > 0) {
+        let temp1 = (current1 == null) ? 0 : current1.val;
+        let temp2 = (current2 == null) ? 0 : current2.val;
+        let dsum = temp1 + temp2 + carry;
+        carry = Math.floor(dsum/10);
+        currentR.next = new ListNode(dsum % 10);
+        if(current1 != null) current1 = current1.next;
+        if(current2 != null) current2 = current2.next;
+        currentR = currentR.next;
+    }
+    if(carry > 0) currentR.next = new ListNode(carry);
+    return Result.next;
 };
