@@ -43,5 +43,46 @@ s consists of English letters (lower-case and upper-case), ',' and '.'.
  * @return {string}
  */
 var convert = function(s, numRows) {
-    
+	if(numRows === 1){
+		return s;
+	}
+    let list = s.split('');
+    let resultObj;
+    if(list.length === 1){
+    	return list[0];
+    } else {
+	    resultObj = {};
+	    for(let i = 0; i < numRows; i++){
+	    	resultObj[i] = '';
+	    }
+	    resultObj[0] = list[0];
+	    let rowIndex = 1;
+	    let up = true;
+	    for(i = 1; i < list.length; i++){
+	    	if(up){
+		    	resultObj[rowIndex] += list[i];
+		    	if(rowIndex + 1 !== numRows){
+		    		rowIndex++;
+		    	} else {
+		    		rowIndex--;
+		    		up = false;
+		    	}
+	    	} else {
+	    		resultObj[rowIndex] += list[i];
+		    	if(rowIndex !== 0){
+		    		rowIndex--;
+		    	} else {
+		    		rowIndex++;
+		    		up = true;
+		    	}
+	    	}
+	    }
+    }
+    let result = '';
+    for(let key in resultObj){
+    	result += resultObj[key];
+    }
+    return result;
 };
+
+console.log(convert("PAYPALISHIRING", 2))
