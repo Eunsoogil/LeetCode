@@ -33,5 +33,17 @@ Constraints:
  * @return {number}
  */
 var reverse = function(x) {
-    
+    let isNegative = x < 0;
+    let xStrArr = Math.abs(x).toString().split("");
+    let reversStr = xStrArr.reverse().join("");
+    let num = Number(reversStr);
+    if (isNegative && num > Math.pow(2, 31)) {
+        return 0;
+    }
+    if (!isNegative && num > Math.pow(2, 31) - 1) {
+        return 0;
+    }
+    return isNegative ? -num : num;
 };
+
+console.log(reverse(1534236469))
