@@ -37,5 +37,20 @@ n == height.length
  * @return {number}
  */
 var maxArea = function(height) {
-    
+    let result = 0;
+    let temp;
+    let x;
+    let i;
+    let j;
+    for (i = 0; i < height.length - 1; i++) {
+        if(height[i] === 0) continue;
+        for (j = i + 1; j < height.length; j++) {
+            if(height[j] === 0) continue;
+            x = j - i;
+            height[j] > height[i] ? temp = x * height[i] : temp = x * height[j];
+            if(result < temp) result = temp;
+        }
+    }
+    return result;
 };
+console.log(maxArea([1,2,1]))
