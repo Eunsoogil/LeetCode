@@ -64,7 +64,7 @@ var romanToInt = function(s) {
     while (true){
         if (s.startsWith(roman[i])){
             result += romanNum[i];
-            if(s.length === 1){
+            if(s.length === roman[i].length){
                 break;
             } else {
                 s = s.substr(roman[i].length);
@@ -76,4 +76,4 @@ var romanToInt = function(s) {
     return result;
 };
 
-console.log(romanToInt('MCMXCIV'))
+console.log(romanToInt('MMMCMXCIV'))
