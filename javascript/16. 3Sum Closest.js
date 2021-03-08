@@ -23,25 +23,33 @@ Constraints:
  * @return {number}
  */
 var threeSumClosest = function(nums, target) {
-    nums.sort((a, b) => a - b);
-    const result = 0;
-    let i, low, high, sum;
-    for(i = 0; i < nums.length; i++) {
-        low = i+1, high = nums.length-1, sum = 0;
+    let len = nums.length;
         
-        while(low < high) {
-            sum = nums[i] + nums[low] + nums[high];
-            
-            if(sum === 0) {
-                result.push([nums[i], nums[low], nums[high]]);
-                while(nums[low+1] === nums[low]) low++;
-                while(nums[high-1] === nums[high]) high--;
-                low++;
-                high--;
-            } else if(sum < 0) low++;
-            else high--;
+    nums.sort((a, b) => a - b);
+    
+    let result = nums[0] + nums[1] + nums[2];
+
+    for(let i = 0; i< len - 2 ; i++) {
+        let j = i + 1;
+        let k = len - 1;
+        
+        while (j < k) {
+            let sum = nums[i] + nums[j] + nums[k];
+            let dif = sum - target;
+            if (Math.abs(sum - target) < Math.abs(result - target)){
+                result = sum;
+            }
+            if (dif < 0) {
+                j++;
+            } else if (dif > 0) {
+                k--;
+            } else if (!dif) {
+                return target;
+            }   
         }
-        while(nums[i+1] === nums[i]) i++;
     }
-    return result;    
+    
+    return result;
 };
+
+console.log(threeSumClosest([-1,2,1,-4, 3, 2, 1, 4], 2))
