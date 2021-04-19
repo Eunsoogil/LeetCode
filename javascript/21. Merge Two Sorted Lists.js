@@ -1,5 +1,6 @@
 /*
-Merge two sorted linked lists and return it as a sorted list. The list should be made by splicing together the nodes of the first two lists.
+Merge two sorted linked lists and return it as a sorted list.
+The list should be made by splicing together the nodes of the first two lists.
 
  
 
@@ -38,5 +39,31 @@ Both l1 and l2 are sorted in non-decreasing order.
  * @return {ListNode}
  */
 var mergeTwoLists = function(l1, l2) {
-    
+    let list = new ListNode();
+	while(l1 || l2){
+		if(l1 && l2){
+		    if(l1.val >= l2.val){
+		    	list.val = l1.val;
+		    	list.next = new ListNode();
+		    	list = list.next;
+		    	l1 = l1.next;
+		    } else {
+		    	list.val = l2.val;
+		    	list.next = new ListNode();
+		    	list = list.next;
+		    	l2 = l2.next;    	
+		    }			
+		} else if(l1){
+	    	list.val = l1.val;
+	    	list.next = new ListNode();
+	    	list = list.next;
+	    	l1 = l1.next;			
+		} else{
+	    	list.val = l2.val;
+	    	list.next = new ListNode();
+	    	list = list.next;
+	    	l2 = l2.next;    
+		}
+    }
+    return list;
 };

@@ -1,5 +1,6 @@
 /*
-Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
+determine if the input string is valid.
 
 An input string is valid if:
 
@@ -40,5 +41,32 @@ s consists of parentheses only '()[]{}'.
  * @return {boolean}
  */
 var isValid = function(s) {
-    
+	let length = s.length;
+	if(length % 2 === 1) return false;
+	let char = {
+		'(' : 1,
+		')' : 2,
+		'[' : 3,
+		']' : 4,
+		'{' : 5,
+		'}' : 6,
+	};
+	let memory = [];
+	for(let i = 0; i < length; i++){
+		if(char[s[i]] % 2 === 1){
+			memory.push(char[s[i]]);
+		} else {
+			if(memory.pop() + 1 !== char[s[i]]) return false;
+		}
+	}
+	if(memory.length !== 0) return false;
+	return true;
 };
+
+console.log(isValid("()"))
+console.log(isValid("()[]{}"))
+console.log(isValid("(]"))
+console.log(isValid("([)]"))
+console.log(isValid("{[]}"))
+console.log(isValid("{[((([[[{{{[[[{{}}]]]}}}]]])))]}{{[[()]]}}"))
+console.log(isValid("[[[]"))
